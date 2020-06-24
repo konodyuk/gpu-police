@@ -15,11 +15,9 @@ config_option = click.option(
     help='path to config.yaml; by default, ~/.gpu-police/config.yaml is used'
 )
 
-
 @click.group()
 def cli():
     pass
-
 
 @cli.command()
 def init():
@@ -31,7 +29,6 @@ def init():
     print("Created [bold]~/.gpu-police/config.yaml[/] file")
     print("Please manually provide [bold]~/.gpu-police/credentials.json[/] or specify a custom path to it in the config")
 
-
 @cli.command()
 @config_option
 def run(config):
@@ -41,7 +38,6 @@ def run(config):
     from gpu_police.scheduler import ts
 
     ts.run()
-
 
 @click.command()
 @click.option('--lines', '-n', type=int, default=None, help='output the last N lines instead of the whole logfile')
