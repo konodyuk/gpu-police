@@ -1,6 +1,5 @@
 from rich.console import Console
 
-
 def get_console(out_file=None):
     return Console(log_path=False, width=120, highlight=False, tab_size=16, file=out_file)
 
