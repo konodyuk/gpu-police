@@ -4,9 +4,9 @@ from pathlib import Path
 
 import click
 import shutil
-from rich import print
 
 from gpu_police.config import load_config, DEFAULT_FILENAME
+from gpu_police.logging import get_console, format_entries
 
 config_option = click.option(
     '--config', 
@@ -43,14 +43,14 @@ def run(config):
 
 
 @click.command()
-@click.option('--lines', default=None, help='output the last N lines instead of the whole logfile')
+@click.option('--lines', '-n', type=int, default=None, help='output the last N lines instead of the whole logfile')
 def wtf(lines):
-    load_config(DEFAULT_FILENAME)
+    from gpu_police.config import LOGFILE
 
-    from gpu_police.config import config
+    log_entries = open(LOGFILE).read().strip().split('\n\n')
+    if lines is not None:
+        log_entries = log_entries[-lines:]
 
-    if lines is None:
-        command = f"tail {config.log.file}"
-    else:
-        command = f"tail -n {lines} {config.log.file}"
-    os.system(command)
+    console = get_console()
+    log_output = format_entries(log_entries)
+    console.print(log_output)

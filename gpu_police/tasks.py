@@ -3,13 +3,13 @@ from abc import ABC, abstractmethod
 from collections import defaultdict
 
 import attr
-from rich.console import Console
 from box import Box
 
 from gpu_police.scheduler import ts
 from gpu_police.config import config
 from gpu_police.sheets_middleware import get_whitelist
 from gpu_police.process import Process
+from gpu_police.logging import get_console
 
 class Task(ABC):
     period = 1
@@ -146,12 +146,12 @@ class KillIdle(Task):
 class Log(Task):
     def __init__(self):
         outfile = open(config.log.file, "a")
-        self.console = Console(log_path=False, width=120, highlight=False, tab_size=16, file=outfile)
+        self.console = get_console(outfile)
     
     def run(self, state):
         for item in state.killed:
-            self.log(f"[bold green]Killed:[/] {item['process']}\n[bold green]Reason:[/] {item['reason']}")
+            self.log(f"Killed: {item['process']}\nReason: {item['reason']}")
         state.killed.clear()
             
     def log(self, line):
-        self.console.log(line)
+        self.console.log(line, end='\n\n')
