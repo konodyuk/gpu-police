@@ -13,7 +13,7 @@ setuptools.setup(
         "toml",
         "click",
         "python-box",
-        "google-api-python-client",
+        "gspread",
     ],
     entry_points={
         "console_scripts": ["gpu-police=gpu_police.cli:cli", "wtf-police=gpu_police.cli:wtf"]
