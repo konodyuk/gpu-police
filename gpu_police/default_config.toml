@@ -8,6 +8,7 @@
 
 [whitelist]
     credentials = "~/.gpu-police/credentials.json"
+    token_file = "~/.gpu-police/token.pickle"
     scopes = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
     spreadsheet_id = "11yVpQKyI-Hkvlc5hAEhPBWsN3yLE0OlYSVOiLY_CUxI"
     queries = ["'Лист2'!C2:C1000", "'Лист2'!F2:F1000"]

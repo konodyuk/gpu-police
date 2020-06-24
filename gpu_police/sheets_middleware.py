@@ -12,24 +12,25 @@ from gpu_police.config import config
 
 SCOPES = config.whitelist.scopes
 SPREADSHEET_ID = config.whitelist.spreadsheet_id
+TOKEN_FILE = Path(config.whitelist.token_file).expanduser()
 
 def update_token():
     creds_file = Path(config.whitelist.credentials).expanduser()
     flow = InstalledAppFlow.from_client_secrets_file(creds_file, SCOPES)
     creds = flow.run_local_server(port=0)
-    with open('token.pickle', 'wb') as token:
+    with open(TOKEN_FILE, 'wb') as token:
         pickle.dump(creds, token)
 
 def _get_values(query):
     creds = None
     if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
+        with open(TOKEN_FILE, 'rb') as token:
             creds = pickle.load(token)
 
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
-            with open('token.pickle', 'wb') as token:
+            with open(TOKEN_FILE, 'wb') as token:
                 pickle.dump(creds, token)
         else:
             update_token()
