@@ -8,6 +8,6 @@ def format_entries(entries):
         date, sep, body = entry.partition(' ')
         date = f"[cyan][{date}][/]"
         for keyword in ["Killed:", "Reason:"]:
-            body = body.replace(keyword, f"[bold green]{keyword}[/]")
+            body = body.replace(keyword, f"[bold red]{keyword}[/]")
         entries[i] = date + sep + body
     return "\n\n".join(entries)
