@@ -120,7 +120,7 @@ class KillBlacklisted(Task):
                 })
 
 
-@ts.register(memory_threshold=400)
+@ts.register(memory_threshold=config.idle.memory_threshold)
 @attr.s
 class KillIdle(Task):
     """kills idle processes"""
