@@ -4,6 +4,7 @@ from pathlib import Path
 
 import click
 import shutil
+from rich import print
 
 from gpu_police.config import load_config, DEFAULT_FILENAME
 from gpu_police.logging import get_console, format_entries
