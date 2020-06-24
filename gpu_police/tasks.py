@@ -112,7 +112,7 @@ class KillBlacklisted(Task):
     def run(self, state):
         for process in state.running_processes:
             if process.user not in state.whitelist:
-                if not debug:
+                if not config.general.debug:
                     process.kill()
                 state.killed.append({
                     'process': process, 
@@ -133,7 +133,7 @@ class KillIdle(Task):
     def run(self, state):
         for process in state.running_processes:
             if state.stats[process].idle and process.memory_consumption > self.memory_threshold:
-                if not debug:
+                if not config.general.debug:
                     process.kill()
                 state.killed.append({
                     'process': process, 
