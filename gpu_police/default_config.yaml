@@ -18,8 +18,5 @@ whitelist:
       query: "F:F"
   period: 10
 
-log:
-  file: "/var/log/gpu-police.log"
-
 custom_tasks:
   files: []
