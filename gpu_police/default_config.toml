@@ -1,0 +1,20 @@
+[general]
+    window_size = 10
+    interval = 10
+    debug = 1
+
+[idle]
+    memory_threshold = 1500
+
+[whitelist]
+    credentials = "~/.gpu-police/credentials.json"
+    scopes = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+    spreadsheet_id = "11yVpQKyI-Hkvlc5hAEhPBWsN3yLE0OlYSVOiLY_CUxI"
+    queries = ["'Лист2'!C2:C1000", "'Лист2'!F2:F1000"]
+    period = 10
+
+[log]
+    file = "/var/log/gpu-police.log"
+
+[custom_tasks]
+    files = []
