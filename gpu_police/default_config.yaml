@@ -1,0 +1,25 @@
+general:
+  window_size: 10
+  interval: 10
+  debug: 1
+
+idle:
+  memory_threshold: 1500
+
+whitelist:
+  credentials: "~/.gpu-police/credentials.json"
+  table_name: "Данные формы"
+  queries:
+    1:
+      sheet: "Лист2"
+      query: "C:C"
+    2:
+      sheet: "Лист2"
+      query: "F:F"
+  period: 10
+
+log:
+  file: "/var/log/gpu-police.log"
+
+custom_tasks:
+  files: []

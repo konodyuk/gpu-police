@@ -11,7 +11,7 @@ from gpu_police.config import load_config, DEFAULT_FILENAME
 config_option = click.option(
     '--config', 
     default=DEFAULT_FILENAME, 
-    help='path to config.toml; by default, ~/.gpu-police/config.toml is used'
+    help='path to config.yaml; by default, ~/.gpu-police/config.yaml is used'
 )
 
 
@@ -26,8 +26,8 @@ def init():
     if not path.exists():
         print("Created [bold]~/.gpu-police[/] folder")
         os.mkdir(path)
-    shutil.copy(pkg_resources.resource_filename('gpu_police', 'default_config.toml'), path / 'config.toml')
-    print("Created [bold]~/.gpu-police/config.toml[/] file")
+    shutil.copy(pkg_resources.resource_filename('gpu_police', 'default_config.yaml'), path / 'config.yaml')
+    print("Created [bold]~/.gpu-police/config.yaml[/] file")
     print("Please manually provide [bold]~/.gpu-police/credentials.json[/] or specify a custom path to it in the config")
 
 
@@ -40,16 +40,6 @@ def run(config):
     from gpu_police.scheduler import ts
 
     ts.run()
-
-
-@cli.command()
-@config_option
-def update_token(config):
-    load_config(config)
-
-    from gpu_police.sheets_middleware import update_token
-
-    update_token()
 
 
 @click.command()
