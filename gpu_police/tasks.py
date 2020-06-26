@@ -4,6 +4,7 @@ from collections import defaultdict
 
 import attr
 from box import Box
+from rich.markup import escape
 
 from gpu_police.scheduler import ts
 from gpu_police.config import config, LOGFILE
@@ -175,4 +176,4 @@ class Log(Task):
         state.killed.clear()
             
     def log(self, line):
-        self.console.log(line, end='\n\n')
+        self.console.log(escape(line), end='\n\n')
