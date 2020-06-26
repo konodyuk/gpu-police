@@ -7,7 +7,7 @@ import shutil
 from rich import print
 
 from gpu_police.config import load_config, DEFAULT_FILENAME
-from gpu_police.logging import get_console, format_entries
+from gpu_police.logging import get_console, format_logs
 
 config_option = click.option(
     '--config', 
@@ -44,10 +44,11 @@ def run(config):
 def wtf(lines):
     from gpu_police.config import LOGFILE
 
-    log_entries = open(LOGFILE).read().strip().split('\n\n')
+    log_lines = open(LOGFILE).read().strip().split('\n')
     if lines is not None:
-        log_entries = log_entries[-lines:]
+        log_lines = log_lines[-lines * 3:]
+    logs = '\n'.join(log_lines).strip('\n')
 
     console = get_console()
-    log_output = format_entries(log_entries)
+    log_output = format_logs(logs)
     console.print(log_output)
