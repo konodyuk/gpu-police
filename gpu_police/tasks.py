@@ -165,7 +165,7 @@ class ReserveGPUs(Task):
 
 @ts.register()
 class Log(Task):
-    def setup(self):
+    def setup(self, state):
         outfile = open(LOGFILE, "a")
         self.console = get_console(outfile)
     
