@@ -6,7 +6,7 @@ from rich.markup import escape
 TIMESTAMP_REGEX = "\[\[\d{2}:\d{2}:\d{2}\]\]"
 
 def get_console(out_file=None):
-    return Console(log_path=False, width=120, highlight=False, tab_size=16, file=out_file)
+    return Console(log_path=False, width=125, highlight=False, tab_size=16, file=out_file, log_time_format="[%d.%m.%y %H:%M]")
 
 def format_time(match):
     time = match.group(0)
