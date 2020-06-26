@@ -6,7 +6,7 @@ import attr
 from box import Box
 
 from gpu_police.scheduler import ts
-from gpu_police.config import config
+from gpu_police.config import config, LOGFILE
 from gpu_police.sheets_middleware import get_whitelist
 from gpu_police.process import Process
 from gpu_police.logging import get_console
@@ -165,8 +165,8 @@ class ReserveGPUs(Task):
 
 @ts.register()
 class Log(Task):
-    def __init__(self):
-        outfile = open(config.log.file, "a")
+    def setup(self):
+        outfile = open(LOGFILE, "a")
         self.console = get_console(outfile)
     
     def run(self, state):
