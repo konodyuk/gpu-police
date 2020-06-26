@@ -18,5 +18,10 @@ whitelist:
       query: "F:F"
   period: 10
 
+reserved_gpus:
+  0: ["user1"]
+  1: ["user2"]
+  2: ["user1", "user2"]
+
 custom_tasks:
   files: []

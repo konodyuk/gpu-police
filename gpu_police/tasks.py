@@ -141,6 +141,27 @@ class KillIdle(Task):
                               f'memory consumption: {process.memory_consumption}MB > {self.memory_threshold}MB (idle threshold)'
                 })
 
+@ts.register(gpu_to_users=config.reserved_gpus)
+@attr.s
+class ReserveGPUs(Task):
+    """monitors that certain GPUs are used by certain people and kills anyone else"""
+
+    gpu_to_users = attr.ib(factory=dict)
+
+    def setup(self, state):
+        state.killed = []
+
+    def run(self, state):
+        for process in state.running_processes:
+            if process.gpu in self.gpu_to_users:
+                if process.user in self.gpu_to_users[process.gpu]:
+                    continue
+                if not config.general.debug:
+                    process.kill()
+                state.killed.append({
+                    'process': process,
+                    'reason': f'GPU #{process.gpu} is reserved for {self.gpu_to_users[process.gpu]}'
+                })
 
 @ts.register()
 class Log(Task):
